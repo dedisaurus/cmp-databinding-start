@@ -1,0 +1,23 @@
+<div class="container">
+  <!-- binding to custom event -->
+  <app-cockpit (serverCreated)="onServerAdded($event)" (bluePrintCreated)="onBlueprintAdded($event)"></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- dibawah adalah cara custom binding melalui component lain
+ caranya ialah pertama kita buat decorator di child component yg berisikan nama dan tipe data
+lalu di parent component kita buat array javascript untuk masukan value ke decorator yg telah kita buat
+untuk nama mesti disamakan. setelah itu kita looping dan binding menggunakan proprty [] data yg ada diparent-->
+      <app-server-element *ngFor="let serverElement of serverElements" 
+      [srvElement]="serverElement">
+        <p>
+          <strong *ngIf="serverElement.type === 'server'" 
+          style="color: red">{{ serverElement.content }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">
+            {{ serverElement.content }}</em>
+        </p>
+        <!-- diatas adalah contoh binding content into component -->
+      </app-server-element>
+    </div>
+  </div>
+</div>
